@@ -100,7 +100,8 @@
     "deploy": "tsx ../../tools/deploy/package-deployer.ts shared",
     "deploy:beta": "tsx ../../tools/deploy/package-deployer.ts shared --tag beta",
     "deploy:alpha": "tsx ../../tools/deploy/package-deployer.ts shared --tag alpha",
-    "deploy:dry-run": "tsx ../../tools/deploy/package-deployer.ts shared --dry-run"
+    "deploy:dry-run": "tsx ../../tools/deploy/package-deployer.ts shared --dry-run",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "lodash-es": "^4.17.21",
@@ -110,7 +111,7 @@
     "vue": "^3.3.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^3.0.0",
+    "@antfu/eslint-config": "^6.0.0",
     "@ldesign/builder": "workspace:*",
     "@playwright/test": "^1.40.1",
     "@rollup/plugin-alias": "^5.1.1",
@@ -129,7 +130,7 @@
     "@vitest/ui": "^2.0.0",
     "@vue/test-utils": "^2.4.4",
     "autoprefixer": "^10.4.21",
-    "eslint": "^9.0.0",
+    "eslint": "^9.18.0",
     "fs-extra": "^11.2.0",
     "glob": "^10.3.10",
     "jsdom": "^24.0.0",
@@ -143,7 +144,7 @@
     "rollup-plugin-less": "^1.1.3",
     "rollup-plugin-postcss": "^4.0.2",
     "size-limit": "^11.0.0",
-    "typescript": "^5.6.0",
+    "typescript": "^5.7.3",
     "vite": "^5.0.12",
     "vitepress": "^1.0.0",
     "vitest": "^2.0.0",
