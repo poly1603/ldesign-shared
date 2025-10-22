@@ -309,7 +309,6 @@ export function useWebSocket(
     const delay = reconnectDelay * Math.pow(2, reconnectCount.value - 1) // 指数退避
     
     reconnectTimer = setTimeout(() => {
-      `)
       connect()
     }, delay)
   }

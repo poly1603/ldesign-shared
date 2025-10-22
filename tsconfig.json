@@ -4,7 +4,7 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
-    "moduleResolution": "bundler",
+    "moduleResolution": "node10",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -31,6 +31,7 @@
     },
 
     // 输出配置
+    "noEmit": false,
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,

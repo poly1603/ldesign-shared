@@ -68,13 +68,10 @@
     "LICENSE",
     "package.json",
     "es",
-    "lib",
-    "dist"
+    "lib"
   ],
   "scripts": {
-    "build": "node scripts/build.js",
-    "build:dev": "node scripts/build.js --dev",
-    "build:watch": "ldesign-builder build --watch",
+    "build": "ldesign-builder build -f esm,cjs,dts",
     "dev": "ldesign-builder watch",
     "type-check": "vue-tsc --noEmit",
     "type-check:watch": "vue-tsc --noEmit --watch",

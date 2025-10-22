@@ -17,9 +17,6 @@ export * from './test-utils'
 // 导出错误处理
 export * from './error-handler'
 
-// 导出原有的包管理
-export * from './package'
-
 // 导出工具函数（排除与hooks冲突的函数）
 export * from './utils/array'
 export * from './utils/batchUpdate'
