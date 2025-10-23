@@ -1,0 +1,207 @@
+/**
+ * Selector Design Tokens
+ * 
+ * 选择器设计令牌（CSS 变量）
+ * 各包可选择性引入，也可以完全自定义
+ * 
+ * 使用方式：
+ * @import '@ldesign/shared/styles/selector-tokens.css';
+ */
+
+:root {
+  /* ========================================
+   * 尺寸 Tokens
+   * ======================================== */
+
+  /* 触发器尺寸 */
+  --ld-selector-trigger-size: 36px;
+  --ld-selector-trigger-min-width: 120px;
+  --ld-selector-trigger-radius: 8px;
+  --ld-selector-trigger-padding: 8px 12px;
+
+  /* 面板尺寸 */
+  --ld-selector-panel-width: 320px;
+  --ld-selector-panel-min-width: 180px;
+  --ld-selector-panel-max-width: 480px;
+  --ld-selector-panel-max-height: 400px;
+  --ld-selector-panel-radius: 12px;
+  --ld-selector-panel-padding: 8px;
+
+  /* 选项尺寸 */
+  --ld-selector-option-height: 40px;
+  --ld-selector-option-padding: 12px;
+  --ld-selector-option-radius: 8px;
+  --ld-selector-option-gap: 8px;
+
+  /* 网格布局 */
+  --ld-selector-grid-columns: 4;
+  --ld-selector-grid-gap: 10px;
+  --ld-selector-grid-item-size: 64px;
+
+
+  /* ========================================
+   * 颜色 Tokens
+   * ======================================== */
+
+  /* 触发器颜色 */
+  --ld-selector-trigger-bg: rgba(255, 255, 255, 0.1);
+  --ld-selector-trigger-hover-bg: rgba(255, 255, 255, 0.2);
+  --ld-selector-trigger-active-bg: rgba(255, 255, 255, 0.25);
+  --ld-selector-trigger-text: currentColor;
+  --ld-selector-trigger-border: rgba(0, 0, 0, 0.1);
+  --ld-selector-trigger-hover-border: rgba(0, 0, 0, 0.2);
+
+  /* 面板颜色 */
+  --ld-selector-panel-bg: #ffffff;
+  --ld-selector-panel-border: rgba(0, 0, 0, 0.06);
+
+  /* 选项颜色 */
+  --ld-selector-option-bg: transparent;
+  --ld-selector-option-hover-bg: rgba(0, 0, 0, 0.03);
+  --ld-selector-option-active-bg: rgba(102, 126, 234, 0.08);
+  --ld-selector-option-active-border: rgba(102, 126, 234, 0.3);
+  --ld-selector-option-text: #1a1a1a;
+  --ld-selector-option-active-text: #667eea;
+  --ld-selector-option-disabled-text: #999999;
+  --ld-selector-option-disabled-bg: rgba(0, 0, 0, 0.02);
+
+  /* 搜索框颜色 */
+  --ld-selector-search-bg: rgba(0, 0, 0, 0.02);
+  --ld-selector-search-border: rgba(0, 0, 0, 0.1);
+  --ld-selector-search-focus-border: rgba(102, 126, 234, 0.5);
+
+  /* 徽章颜色 */
+  --ld-selector-badge-bg: rgba(0, 0, 0, 0.05);
+  --ld-selector-badge-text: #666666;
+  --ld-selector-badge-active-bg: rgba(102, 126, 234, 0.15);
+  --ld-selector-badge-active-text: #667eea;
+
+
+  /* ========================================
+   * 阴影 Tokens
+   * ======================================== */
+
+  --ld-selector-panel-shadow: 0 10px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  --ld-selector-panel-shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.1);
+  --ld-selector-panel-shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.2);
+
+  --ld-selector-trigger-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --ld-selector-trigger-hover-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+
+
+  /* ========================================
+   * 动画 Tokens
+   * ======================================== */
+
+  --ld-selector-transition-duration: 200ms;
+  --ld-selector-transition-duration-fast: 150ms;
+  --ld-selector-transition-duration-slow: 300ms;
+  --ld-selector-transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
+  --ld-selector-transition-easing-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+
+  /* ========================================
+   * 字体 Tokens
+   * ======================================== */
+
+  --ld-selector-font-size-sm: 12px;
+  --ld-selector-font-size-base: 14px;
+  --ld-selector-font-size-lg: 16px;
+
+  --ld-selector-font-weight-normal: 400;
+  --ld-selector-font-weight-medium: 500;
+  --ld-selector-font-weight-semibold: 600;
+
+  --ld-selector-line-height: 1.5;
+
+
+  /* ========================================
+   * Z-Index Tokens
+   * ======================================== */
+
+  --ld-selector-z-index-dropdown: 1000;
+  --ld-selector-z-index-dialog: 2000;
+  --ld-selector-z-index-overlay: 1999;
+}
+
+/* ========================================
+ * 深色模式 Tokens
+ * ======================================== */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 触发器颜色 - 深色模式 */
+    --ld-selector-trigger-bg: rgba(255, 255, 255, 0.05);
+    --ld-selector-trigger-hover-bg: rgba(255, 255, 255, 0.1);
+    --ld-selector-trigger-active-bg: rgba(255, 255, 255, 0.15);
+    --ld-selector-trigger-border: rgba(255, 255, 255, 0.1);
+    --ld-selector-trigger-hover-border: rgba(255, 255, 255, 0.2);
+
+    /* 面板颜色 - 深色模式 */
+    --ld-selector-panel-bg: #1f2937;
+    --ld-selector-panel-border: rgba(255, 255, 255, 0.1);
+
+    /* 选项颜色 - 深色模式 */
+    --ld-selector-option-hover-bg: rgba(255, 255, 255, 0.05);
+    --ld-selector-option-active-bg: rgba(102, 126, 234, 0.2);
+    --ld-selector-option-active-border: rgba(102, 126, 234, 0.5);
+    --ld-selector-option-text: #f3f4f6;
+    --ld-selector-option-active-text: #a5b4fc;
+    --ld-selector-option-disabled-text: #6b7280;
+    --ld-selector-option-disabled-bg: rgba(255, 255, 255, 0.02);
+
+    /* 搜索框颜色 - 深色模式 */
+    --ld-selector-search-bg: rgba(255, 255, 255, 0.05);
+    --ld-selector-search-border: rgba(255, 255, 255, 0.1);
+    --ld-selector-search-focus-border: rgba(102, 126, 234, 0.6);
+
+    /* 徽章颜色 - 深色模式 */
+    --ld-selector-badge-bg: rgba(255, 255, 255, 0.1);
+    --ld-selector-badge-text: #9ca3af;
+    --ld-selector-badge-active-bg: rgba(102, 126, 234, 0.25);
+    --ld-selector-badge-active-text: #a5b4fc;
+
+    /* 阴影 - 深色模式 */
+    --ld-selector-panel-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* ========================================
+ * 显式深色模式类
+ * ======================================== */
+
+.dark {
+  /* 触发器颜色 - 深色模式 */
+  --ld-selector-trigger-bg: rgba(255, 255, 255, 0.05);
+  --ld-selector-trigger-hover-bg: rgba(255, 255, 255, 0.1);
+  --ld-selector-trigger-active-bg: rgba(255, 255, 255, 0.15);
+  --ld-selector-trigger-border: rgba(255, 255, 255, 0.1);
+  --ld-selector-trigger-hover-border: rgba(255, 255, 255, 0.2);
+
+  /* 面板颜色 - 深色模式 */
+  --ld-selector-panel-bg: #1f2937;
+  --ld-selector-panel-border: rgba(255, 255, 255, 0.1);
+
+  /* 选项颜色 - 深色模式 */
+  --ld-selector-option-hover-bg: rgba(255, 255, 255, 0.05);
+  --ld-selector-option-active-bg: rgba(102, 126, 234, 0.2);
+  --ld-selector-option-active-border: rgba(102, 126, 234, 0.5);
+  --ld-selector-option-text: #f3f4f6;
+  --ld-selector-option-active-text: #a5b4fc;
+  --ld-selector-option-disabled-text: #6b7280;
+  --ld-selector-option-disabled-bg: rgba(255, 255, 255, 0.02);
+
+  /* 搜索框颜色 - 深色模式 */
+  --ld-selector-search-bg: rgba(255, 255, 255, 0.05);
+  --ld-selector-search-border: rgba(255, 255, 255, 0.1);
+  --ld-selector-search-focus-border: rgba(102, 126, 234, 0.6);
+
+  /* 徽章颜色 - 深色模式 */
+  --ld-selector-badge-bg: rgba(255, 255, 255, 0.1);
+  --ld-selector-badge-text: #9ca3af;
+  --ld-selector-badge-active-bg: rgba(102, 126, 234, 0.25);
+  --ld-selector-badge-active-text: #a5b4fc;
+
+  /* 阴影 - 深色模式 */
+  --ld-selector-panel-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+}

@@ -87,3 +87,8 @@ export type {
 // 导出 UI 组件
 // TEMPORARY: Components disabled during build fix
 // export * from './components'
+
+// 导出选择器协议和逻辑层
+export * from './protocols'
+export * from './composables'
+export * from './icons'

@@ -20,12 +20,24 @@
     "url": "https://github.com/ldesign/ldesign/issues"
   },
   "type": "module",
-  "sideEffects": false,
+  "sideEffects": [
+    "*.css"
+  ],
   "exports": {
     ".": {
       "types": "./es/index.d.ts",
       "import": "./es/index.js",
       "require": "./lib/index.cjs"
+    },
+    "./composables": {
+      "types": "./es/composables/index.d.ts",
+      "import": "./es/composables/index.js",
+      "require": "./lib/composables/index.cjs"
+    },
+    "./composables/*": {
+      "types": "./es/composables/*.d.ts",
+      "import": "./es/composables/*.js",
+      "require": "./lib/composables/*.cjs"
     },
     "./hooks": {
       "types": "./es/hooks/index.d.ts",
@@ -36,6 +48,26 @@
       "types": "./es/hooks/*.d.ts",
       "import": "./es/hooks/*.js",
       "require": "./lib/hooks/*.cjs"
+    },
+    "./icons": {
+      "types": "./es/icons/index.d.ts",
+      "import": "./es/icons/index.js",
+      "require": "./lib/icons/index.cjs"
+    },
+    "./icons/*": {
+      "types": "./es/icons/*.d.ts",
+      "import": "./es/icons/*.js",
+      "require": "./lib/icons/*.cjs"
+    },
+    "./protocols": {
+      "types": "./es/protocols/index.d.ts",
+      "import": "./es/protocols/index.js",
+      "require": "./lib/protocols/index.cjs"
+    },
+    "./protocols/*": {
+      "types": "./es/protocols/*.d.ts",
+      "import": "./es/protocols/*.js",
+      "require": "./lib/protocols/*.cjs"
     },
     "./types": {
       "types": "./es/types/index.d.ts",
