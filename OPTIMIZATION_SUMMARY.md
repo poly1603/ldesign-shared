@@ -205,3 +205,4 @@ const handleScroll = throttle(updatePosition, 16)
 **测试状态**: 待重启服务器后验证  
 **预期效果**: 所有选择器位置准确，交互一致
 
+

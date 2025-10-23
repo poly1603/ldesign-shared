@@ -478,3 +478,4 @@ A: 这些模式不需要弹出逻辑，只使用状态管理：
 - [LocaleSwitcher](../../i18n/src/adapters/vue/components/LocaleSwitcher.vue)
 - [TemplateSelector](../../template/src/components/TemplateSelector.vue)
 
+

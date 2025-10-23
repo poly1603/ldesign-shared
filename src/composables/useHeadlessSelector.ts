@@ -2,10 +2,15 @@
  * useHeadlessSelector Composable
  * 
  * 无头选择器 - 提供核心逻辑，UI 由各包自行实现
- * 这是选择器的核心，实现了状态管理、键盘导航、搜索过滤等功能
+ * 
+ * 设计原则：
+ * 1. 高性能 - 减少不必要的计算和渲染
+ * 2. 健壮性 - 完整的错误处理
+ * 3. 可访问性 - 完整的键盘支持
+ * 4. 灵活性 - 高度可配置
  */
 
-import { computed, onMounted, onUnmounted, ref, watch, type Ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch, type Ref } from 'vue'
 import type { SelectorOption, SelectorState, SelectorActions } from '../protocols'
 import {
   filterOptions,
@@ -15,9 +20,6 @@ import {
   isClickOutside
 } from '../utils/selector-helpers'
 
-/**
- * useHeadlessSelector 选项
- */
 export interface UseHeadlessSelectorOptions {
   /** 选项列表 */
   options: Ref<SelectorOption[]> | SelectorOption[]
@@ -45,9 +47,6 @@ export interface UseHeadlessSelectorOptions {
   enableKeyboard?: boolean
 }
 
-/**
- * useHeadlessSelector 返回值
- */
 export interface UseHeadlessSelectorReturn {
   /** 状态 */
   state: Readonly<Ref<SelectorState>>
@@ -61,26 +60,10 @@ export interface UseHeadlessSelectorReturn {
   triggerRef: Ref<HTMLElement | null>
   /** 面板引用 */
   panelRef: Ref<HTMLElement | null>
+  /** 活动索引引用（允许直接修改） */
+  activeIndexRef: Ref<number>
 }
 
-/**
- * useHeadlessSelector
- * 
- * @param options - 配置选项
- * @returns 选择器状态和操作方法
- * 
- * @example
- * ```typescript
- * const { state, actions, triggerRef, panelRef } = useHeadlessSelector({
- *   options: colorOptions,
- *   modelValue: currentColor,
- *   searchable: true,
- *   onSelect: (value) => {
- *     console.log('Selected:', value)
- *   }
- * })
- * ```
- */
 export function useHeadlessSelector(
   options: UseHeadlessSelectorOptions
 ): UseHeadlessSelectorReturn {
@@ -99,7 +82,7 @@ export function useHeadlessSelector(
     enableKeyboard = true
   } = options
 
-  // 转换为 ref
+  // 转换为 ref（处理可能是ref或普通值的情况）
   const optionsRef = ref(optionsProp) as Ref<SelectorOption[]>
   const modelValueRef = ref(modelValueProp)
 
@@ -108,7 +91,7 @@ export function useHeadlessSelector(
   const searchQuery = ref('')
   const activeIndex = ref(-1)
 
-  // 引用
+  // DOM引用
   const triggerRef = ref<HTMLElement | null>(null)
   const panelRef = ref<HTMLElement | null>(null)
 
@@ -153,6 +136,9 @@ export function useHeadlessSelector(
     activeIndex: activeIndex.value
   }))
 
+  // 用于标记是否正在执行 toggle,避免立即触发 clickOutside
+  let isToggling = false
+
   /**
    * 打开选择器
    */
@@ -160,13 +146,11 @@ export function useHeadlessSelector(
     if (isOpen.value) return
 
     isOpen.value = true
-
-    // 重置状态
     searchQuery.value = ''
 
-    // 设置激活的选项为当前选中项
+    // 设置激活项为当前选中项
     const selectedIndex = findOptionIndex(filteredOptions.value, modelValueRef.value)
-    activeIndex.value = selectedIndex
+    activeIndex.value = selectedIndex >= 0 ? selectedIndex : 0
 
     onOpen?.()
   }
@@ -188,11 +172,19 @@ export function useHeadlessSelector(
    * 切换选择器状态
    */
   const toggle = () => {
+    // 设置标记,防止同一个点击事件触发 clickOutside
+    isToggling = true
+
     if (isOpen.value) {
       close()
     } else {
       open()
     }
+
+    // 在下一个事件循环中清除标记
+    setTimeout(() => {
+      isToggling = false
+    }, 0)
   }
 
   /**
@@ -224,7 +216,6 @@ export function useHeadlessSelector(
    */
   const search = (query: string) => {
     searchQuery.value = query
-    // 重置激活索引
     activeIndex.value = 0
     onSearch?.(query)
   }
@@ -299,7 +290,10 @@ export function useHeadlessSelector(
       case 'Escape':
         event.preventDefault()
         close()
-        triggerRef.value?.focus()
+        // 返回焦点到触发器
+        requestAnimationFrame(() => {
+          triggerRef.value?.focus()
+        })
         break
 
       case 'ArrowDown':
@@ -336,9 +330,15 @@ export function useHeadlessSelector(
 
   /**
    * 点击外部关闭
+   * 
+   * 关键修复：检查 isToggling 标记
+   * 原因：当点击触发按钮时,toggle() 会设置 isOpen = true,
+   * 但同一个 click 事件会冒泡到 document,导致立即关闭。
+   * 使用 isToggling 标记可以忽略这个同步的 click 事件。
    */
   const handleClickOutside = (event: MouseEvent) => {
     if (!isOpen.value) return
+    if (isToggling) return  // 忽略 toggle 时的点击事件
 
     if (isClickOutside(event, triggerRef.value, panelRef.value)) {
       close()
@@ -347,21 +347,23 @@ export function useHeadlessSelector(
 
   /**
    * 监听 modelValue 变化
+   * 优化：使用 isRef 检查
    */
-  watch(() => modelValueProp, (newValue) => {
-    if (ref(modelValueProp)) {
+  if (modelValueProp && typeof modelValueProp === 'object' && 'value' in modelValueProp) {
+    watch(() => (modelValueProp as Ref).value, (newValue) => {
       modelValueRef.value = newValue
-    }
-  })
+    })
+  }
 
   /**
    * 监听 options 变化
+   * 优化：使用 isRef 检查
    */
-  watch(() => optionsProp, (newOptions) => {
-    if (ref(optionsProp)) {
+  if (optionsProp && typeof optionsProp === 'object' && 'value' in optionsProp) {
+    watch(() => (optionsProp as Ref).value, (newOptions) => {
       optionsRef.value = newOptions as SelectorOption[]
-    }
-  })
+    })
+  }
 
   /**
    * 生命周期
@@ -373,7 +375,7 @@ export function useHeadlessSelector(
     }
   })
 
-  onUnmounted(() => {
+  onBeforeUnmount(() => {
     if (typeof document !== 'undefined') {
       document.removeEventListener('keydown', handleKeydown)
       document.removeEventListener('click', handleClickOutside)
@@ -398,7 +400,7 @@ export function useHeadlessSelector(
     getOptionByValue,
     isSelected,
     triggerRef,
-    panelRef
+    panelRef,
+    activeIndexRef: activeIndex
   }
 }
-
