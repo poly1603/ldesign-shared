@@ -1,6 +1,9 @@
 import { defineConfig } from '@ldesign/builder'
 
 export default defineConfig({
+  // 强制指定为TypeScript库
+  libraryType: 'typescript',
+
   input: 'src/index.ts',
 
   output: {
