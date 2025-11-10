@@ -107,7 +107,6 @@
     "build:watch": "ldesign-builder build --watch",
     "dev": "ldesign-builder build --mode development --watch",
     "clean": "rimraf dist es lib types types-temp coverage .nyc_output temp_vue_files test-build",
-    "prepublishOnly": "pnpm run clean && pnpm run build && pnpm run ci",
     "type-check": "vue-tsc --noEmit",
     "type-check:watch": "vue-tsc --noEmit --watch",
     "lint": "eslint . --fix",
