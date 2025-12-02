@@ -20,85 +20,97 @@
     "url": "https://github.com/ldesign/ldesign/issues"
   },
   "type": "module",
-  "sideEffects": [
-    "*.css"
-  ],
+  "sideEffects": false,
   "exports": {
     ".": {
       "types": "./es/index.d.ts",
       "import": "./es/index.js",
-      "require": "./lib/index.cjs"
+      "require": "./lib/index.cjs",
+      "default": "./es/index.js"
     },
     "./composables": {
       "types": "./es/composables/index.d.ts",
       "import": "./es/composables/index.js",
-      "require": "./lib/composables/index.cjs"
+      "require": "./lib/composables/index.cjs",
+      "default": "./es/composables/index.js"
     },
     "./composables/*": {
       "types": "./es/composables/*.d.ts",
       "import": "./es/composables/*.js",
-      "require": "./lib/composables/*.cjs"
+      "require": "./lib/composables/*.cjs",
+      "default": "./es/composables/*.js"
     },
     "./hooks": {
       "types": "./es/hooks/index.d.ts",
       "import": "./es/hooks/index.js",
-      "require": "./lib/hooks/index.cjs"
+      "require": "./lib/hooks/index.cjs",
+      "default": "./es/hooks/index.js"
     },
     "./hooks/*": {
       "types": "./es/hooks/*.d.ts",
       "import": "./es/hooks/*.js",
-      "require": "./lib/hooks/*.cjs"
+      "require": "./lib/hooks/*.cjs",
+      "default": "./es/hooks/*.js"
     },
     "./icons": {
       "types": "./es/icons/index.d.ts",
       "import": "./es/icons/index.js",
-      "require": "./lib/icons/index.cjs"
+      "require": "./lib/icons/index.cjs",
+      "default": "./es/icons/index.js"
     },
     "./icons/*": {
       "types": "./es/icons/*.d.ts",
       "import": "./es/icons/*.js",
-      "require": "./lib/icons/*.cjs"
+      "require": "./lib/icons/*.cjs",
+      "default": "./es/icons/*.js"
     },
     "./protocols": {
       "types": "./es/protocols/index.d.ts",
       "import": "./es/protocols/index.js",
-      "require": "./lib/protocols/index.cjs"
+      "require": "./lib/protocols/index.cjs",
+      "default": "./es/protocols/index.js"
     },
     "./protocols/*": {
       "types": "./es/protocols/*.d.ts",
       "import": "./es/protocols/*.js",
-      "require": "./lib/protocols/*.cjs"
+      "require": "./lib/protocols/*.cjs",
+      "default": "./es/protocols/*.js"
     },
     "./types": {
       "types": "./es/types/index.d.ts",
       "import": "./es/types/index.js",
-      "require": "./lib/types/index.cjs"
+      "require": "./lib/types/index.cjs",
+      "default": "./es/types/index.js"
     },
     "./types/*": {
       "types": "./es/types/*.d.ts",
       "import": "./es/types/*.js",
-      "require": "./lib/types/*.cjs"
+      "require": "./lib/types/*.cjs",
+      "default": "./es/types/*.js"
     },
     "./utils": {
       "types": "./es/utils/index.d.ts",
       "import": "./es/utils/index.js",
-      "require": "./lib/utils/index.cjs"
+      "require": "./lib/utils/index.cjs",
+      "default": "./es/utils/index.js"
     },
     "./utils/*": {
       "types": "./es/utils/*.d.ts",
       "import": "./es/utils/*.js",
-      "require": "./lib/utils/*.cjs"
-    }
+      "require": "./lib/utils/*.cjs",
+      "default": "./es/utils/*.js"
+    },
+    "./package.json": "./package.json"
   },
   "main": "./lib/index.cjs",
   "module": "./es/index.js",
   "types": "./es/index.d.ts",
-  "unpkg": "./dist/index.min.js",
-  "jsdelivr": "./dist/index.min.js",
+  "unpkg": "./dist/index.js",
+  "jsdelivr": "./dist/index.js",
   "files": [
     "README.md",
     "LICENSE",
-    "package.json",
+    "CHANGELOG.md",
     "es",
     "lib",
     "dist"
@@ -194,5 +206,7 @@
   },
   "directories": {
     "doc": "docs"
-  }
+  },
+  "typings": "./es/index.d.ts",
+  "browser": "./dist/index.js"
 }
