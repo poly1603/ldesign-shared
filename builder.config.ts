@@ -1,25 +1,17 @@
+/**
+ * @ldesign/shared 构建配置
+ */
 import { defineConfig } from '@ldesign/builder'
 
 export default defineConfig({
-  entry: 'src/index.ts',
-  
-  output: {
-    formats: ['esm', 'cjs', 'dts'],
-    esm: {
-      dir: 'es',
-      minify: false
-    },
-    cjs: {
-      dir: 'lib',
-      minify: false
-    },
-    dts: {
-      dir: 'es',
-      only: false
-    }
-  },
-
-  bundler: 'rollup',
-
-  sourcemap: true
+  input: 'src/index.ts',
+  output: [
+    { format: 'esm', dir: 'es', preserveModules: true, preserveModulesRoot: 'src' },
+    { format: 'esm', dir: 'esm', preserveModules: true, preserveModulesRoot: 'src' },
+    { format: 'cjs', dir: 'lib', preserveModules: true, preserveModulesRoot: 'src' },
+    { format: 'umd', dir: 'dist', name: 'LDesignShared' },
+  ],
+  external: [],
+  dts: true,
+  clean: true,
 })
